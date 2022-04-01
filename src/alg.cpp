@@ -3,7 +3,7 @@
 #include <map>
 #include "tstack.h"
 
-int prioritet(char operat) {
+int prior(char operat) {
     switch (operat) {
     case '(': return 0;
     case ')': return 1;
@@ -31,25 +31,25 @@ std::string infx2pstfx(std::string inf) {
     char space = ' ';
     TStack <char, 100> stack;
     for (int i = 0; i < inf.size(); i++) {
-        if (prioritet(inf[i]) == 4) {
+        if (prior(inf[i]) == 4) {
             output.push_back(inf[i]);
             output.push_back(space);
         } else {
-            if (prioritet(inf[i]) == 0) {
+            if (prior(inf[i]) == 0) {
                 stack.push(inf[i]);
             } else if (stack.isEmpty()) {
                 stack.push(inf[i]);
-            } else if ((prioritet(inf[i]) > prioritet(stack.get()))) {
+            } else if ((prior(inf[i]) > prior(stack.get()))) {
                 stack.push(inf[i]);
-            } else if (prioritet(inf[i]) == 1) {
-                while (prioritet(stack.get()) != 0) {
+            } else if (prior(inf[i]) == 1) {
+                while (prior(stack.get()) != 0) {
                     output.push_back(stack.get());
                     output.push_back(space);
                     stack.pop();
                 }
                 stack.pop();
             } else {
-                while (!stack.isEmpty() && (prioritet(inf[i]) <= prioritet(stack.get()))) {
+                while (!stack.isEmpty() && (prior(inf[i]) <= prior(stack.get()))) {
                     output.push_back(stack.get());
                     output.push_back(space);
                     stack.pop();
@@ -74,9 +74,9 @@ int eval(std::string pref) {
     int result = 0;
 
     for (int k = 0; k < pref.size(); k++) {
-        if (prioritet(pref[k]) == 4) {
+        if (prior(pref[k]) == 4) {
             stack1.push(pref[k] - '0');
-        } else if (prioritet(pref[k]) < 4) {
+        } else if (prior(pref[k]) < 4) {
             int a = stack1.get();
             stack1.pop();
             int b = stack1.get();
