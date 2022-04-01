@@ -4,11 +4,11 @@
 
 template<typename T, int size>
 class TStack {
-private:
+ private:
     T arr[100];
     int peak;
 
-public:
+ public:
     TStack() :peak(-1) { }
     T get() const {
         return arr[peak];
