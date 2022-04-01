@@ -49,7 +49,8 @@ std::string infx2pstfx(std::string inf) {
                 }
                 stack.pop();
             } else {
-                while (!stack.isEmpty() && (prior(inf[i]) <= prior(stack.get()))) {
+                while (!stack.isEmpty() && (prior(inf[i]) <= prior(stack.get())))
+                {
                     output.push_back(stack.get());
                     output.push_back(space);
                     stack.pop();
