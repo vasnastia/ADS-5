@@ -37,14 +37,11 @@ std::string infx2pstfx(std::string inf) {
         } else {
             if (prioritet(inf[i]) == 0) {
                 stack.push(inf[i]);
-            }
-            else if (stack.isEmpty()) {
+            } else if (stack.isEmpty()) {
                 stack.push(inf[i]);
-            }
-            else if ((prioritet(inf[i]) > prioritet(stack.get()))) {
+            } else if ((prioritet(inf[i]) > prioritet(stack.get()))) {
                 stack.push(inf[i]);
-            }
-            else if (prioritet(inf[i]) == 1) {
+            } else if (prioritet(inf[i]) == 1) {
                 while (prioritet(stack.get()) != 0) {
                     output.push_back(stack.get());
                     output.push_back(space);
@@ -79,8 +76,7 @@ int eval(std::string pref) {
     for (int k = 0; k < pref.size(); k++) {
         if (prioritet(pref[k]) == 4) {
             stack1.push(pref[k] - '0');
-        }
-        else if (prioritet(pref[k]) < 4) {
+        } else if (prioritet(pref[k]) < 4) {
             int a = stack1.get();
             stack1.pop();
             int b = stack1.get();
