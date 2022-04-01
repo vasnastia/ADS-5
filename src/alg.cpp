@@ -27,48 +27,47 @@ int calc(char operat, int m, int n) {
     }
 }
 std::string infx2pstfx(std::string inf) {
-    std::string output;
-    char space = ' ';
-    TStack <char, 100> stack;
-    for (int i = 0; i < inf.size(); i++) {
-        if (prior(inf[i]) == 4) {
-            output.push_back(inf[i]);
-            output.push_back(space);
-        } else {
-            if (prior(inf[i]) == 0) {
-                stack.push(inf[i]);
-            } else if (stack.isEmpty()) {
-                stack.push(inf[i]);
-            } else if ((prior(inf[i]) > prior(stack.get()))) {
-                stack.push(inf[i]);
-            } else if (prior(inf[i]) == 1) {
-                while (prior(stack.get()) != 0) {
-                    output.push_back(stack.get());
-                    output.push_back(space);
-                    stack.pop();
-                }
-                stack.pop();
-            } else {
-                while (!stack.isEmpty() && (prior(inf[i]) <= prior(stack.get())))
-                {
-                    output.push_back(stack.get());
-                    output.push_back(space);
-                    stack.pop();
-                }
-                stack.push(inf[i]);
-            }
+  std::string output;
+  char space = ' ';
+  TStack <char, 100> stack;
+  for (int i = 0; i < inf.size(); i++) {
+    if (prior(inf[i]) == 4) {
+      output.push_back(inf[i]);
+      output.push_back(space);
+    } else {
+      if (prior(inf[i]) == 0) {
+        stack.push(inf[i]);
+      } else if (stack.isEmpty()) {
+        stack.push(inf[i]);
+      } else if ((prior(inf[i]) > prior(stack.get()))) {
+        stack.push(inf[i]);
+      } else if (prior(inf[i]) == 1) {
+        while (prior(stack.get()) != 0) {
+          output.push_back(stack.get());
+          output.push_back(space);
+          stack.pop();
         }
-    }
-    while (!stack.isEmpty()) {
-        output.push_back(stack.get());
-        output.push_back(space);
         stack.pop();
+      } else {
+        while (!stack.isEmpty() && (prior(inf[i]) <= prior(stack.get()))) {
+          output.push_back(stack.get());
+          output.push_back(space);
+          stack.pop();
+        }
+        stack.push(inf[i]);
+      }
     }
-    for (int j = 0; j < output.size(); j++) {
-        if (output[output.size() - 1] == ' ')
-            output.erase(output.size() - 1);
-    }
-    return output;
+  }
+  while (!stack.isEmpty()) {
+    output.push_back(stack.get());
+    output.push_back(space);
+    stack.pop();
+  }
+  for (int j = 0; j < output.size(); j++) {
+    if (output[output.size() - 1] == ' ')
+      output.erase(output.size() - 1);
+  }
+  return output;
 }
 int eval(std::string pref) {
     TStack <int, 100> stack1;
